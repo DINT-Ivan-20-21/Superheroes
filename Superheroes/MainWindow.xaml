@@ -5,8 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Superheroes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Icon="assets/shield.ico"
+        Title="Superhéroes"
+        MinHeight="700"
+        MinWidth="1000">
+    <Window.Resources>
+        <Style TargetType="Image"
+               x:Key="Flecha">
+            <Setter Property="Width"
+                    Value="25" />
+            <EventSetter Event="MouseLeftButtonUp" Handler="Image_MouseLeftButtonUp"/>
+        </Style>
+        <Style TargetType="Image"
+               x:Key="Icono">
+            <Setter Property="Width"
+                    Value="50" />
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <TabControl Margin="10" Background="WhiteSmoke">
+            <TabItem Header="Ver superhéroes">
+                <DockPanel Background="PaleGreen">
+                    <StackPanel DockPanel.Dock="Bottom"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Image Style="{StaticResource Flecha}"
+                               Source="assets/arrow.png" />
+                        <TextBlock Text="0/0" FontWeight="Bold" FontSize="20" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                        <Image Style="{StaticResource Flecha}"
+                               Source="assets/arrow.png"
+                               RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleY="1"
+                                                    ScaleX="-1" />
+                                    <SkewTransform AngleY="0"
+                                                   AngleX="0" />
+                                    <RotateTransform Angle="0" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </StackPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="10,0,10,0">
+                        <TextBlock Text="Superheroe"
+                                   FontSize="40"
+                                   FontWeight="Black"
+                                   Foreground="WhiteSmoke">
+                            <TextBlock.Effect>
+                                <DropShadowEffect />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Image Width="40"
+                                   Margin="0,0,5,0"
+                                   Source="assets/avengers.png" />
+                            <Image Width="60"
+                                   Margin="5,0,0,0"
+                                   Source="assets/xmen.png" />
+                        </StackPanel>
+                    </DockPanel>
+                    <Image Margin="10"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Nuevo superhéroe">
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

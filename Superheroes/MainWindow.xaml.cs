@@ -24,5 +24,10 @@ namespace Superheroes
         {
             InitializeComponent();
         }
+
+        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
