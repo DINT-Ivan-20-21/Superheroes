@@ -5,13 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Superheroes
 {
@@ -20,14 +14,64 @@ namespace Superheroes
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        List<Superheroe> superheroes;
+
+        private int _indice;
+        int Indice
         {
-            InitializeComponent();
+            get
+            {
+                return _indice;
+            }
+            set
+            {
+                if (value >= 0 && value < superheroes.Count)
+                {
+                    _indice = value;
+                    DataContext = superheroes[_indice];
+                }
+            }
         }
 
-        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        public MainWindow()
         {
+            superheroes = Superheroe.GetSamples();
+            Indice = 0;
+            InitializeComponent();
+            ActualizaContador();
+        }
 
+        private void Flecha_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Indice += int.Parse((sender as Image).Tag.ToString());
+            ActualizaContador();
+        }
+
+        private void AceptarButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Superhéroe insertado con exito", "Superhéroes", MessageBoxButton.OK, MessageBoxImage.Information);
+            superheroes.Add(Resources["nuevoSuperheroe"] as Superheroe);
+            ActualizaContador();
+            Limpiar();
+        }
+
+        private void LimpiarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Limpiar();
+        }
+
+        private void Limpiar()
+        {
+            NombreTextBox.Text = "";
+            ImagenTextBox.Text = "";
+            HeroeRadioButton.IsChecked = true;
+            VengadoresCheckBox.IsChecked = false;
+            XmenCheckBox.IsChecked = false;
+        }
+
+        private void ActualizaContador()
+        {
+            ContadorTextBlock.Text = $"{Indice + 1}/{superheroes.Count}";
         }
     }
 }
