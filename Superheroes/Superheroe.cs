@@ -73,6 +73,11 @@ namespace Superheroes
             set
             {
                 _villano = value;
+                if (value)
+                {
+                    Xmen = false;
+                    Vengador = false;
+                }
                 NotifyPropertyChanged("Villano");
             }
         }

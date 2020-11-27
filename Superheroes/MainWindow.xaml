@@ -17,7 +17,6 @@
                           Heroe="True" />
         <local:VisibilityConverter x:Key="conversorVisibility" />
         <local:BackgroundConverter x:Key="conversorBackground" />
-        <local:CheckBoxCheckedConverter x:Key="conversorChecked" />
         <local:CheckBoxEnabledConverter x:Key="conversorEnabled" />
 
         <!-- Image -->
@@ -48,8 +47,6 @@
         <Style TargetType="CheckBox">
             <Setter Property="IsEnabled"
                     Value="{Binding ElementName=VillanoRadioButton, Path=IsChecked, Converter={StaticResource conversorEnabled}}" />
-            <Setter Property="IsChecked"
-                    Value="{Binding ElementName=VillanoRadioButton, Path=IsChecked, Converter={StaticResource conversorChecked}, Mode=OneWay}" />
         </Style>
 
         <!-- Botones -->
@@ -96,7 +93,7 @@
                                    FontWeight="Bold"
                                    FontSize="20"
                                    Margin="5,0,5,0"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center" />
                         <Image Style="{StaticResource Flecha}"
                                Tag="1"
                                Source="assets/arrow.png"
@@ -113,7 +110,8 @@
                             </Image.RenderTransform>
                         </Image>
                     </StackPanel>
-                    <DockPanel DockPanel.Dock="Top"
+                    <DockPanel LastChildFill="False"
+                               DockPanel.Dock="Top"
                                Margin="10,0,10,0">
                         <TextBlock Text="{Binding Path=Nombre}"
                                    FontSize="40"
@@ -123,8 +121,8 @@
                                 <DropShadowEffect />
                             </TextBlock.Effect>
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Right">
+                        <StackPanel DockPanel.Dock="Right"
+                                    Orientation="Horizontal">
                             <Image Width="40"
                                    Margin="0,0,5,0"
                                    Visibility="{Binding Path=Vengador, Converter={StaticResource conversorVisibility}}"
@@ -147,21 +145,22 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0"
-                                Margin="0,0,5,0">
+                                Margin="0,0,5,0"
+                                DataContext="{DynamicResource nuevoSuperheroe}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Nombre del superhéroe" />
                             <Image Style="{StaticResource Tooltip}"
                                    ToolTip="Nombre del superhéroe en inglés" />
                         </StackPanel>
                         <TextBox x:Name="NombreTextBox"
-                                 Text="{Binding Source={StaticResource nuevoSuperheroe}, Path=Nombre}" />
+                                 Text="{Binding Path=Nombre}" />
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Imagen" />
                             <Image Style="{StaticResource Tooltip}"
                                    ToolTip="Imagen del superhéroe en formato cómic" />
                         </StackPanel>
                         <TextBox x:Name="ImagenTextBox"
-                                 Text="{Binding Source={StaticResource nuevoSuperheroe}, Path=Imagen}" />
+                                 Text="{Binding Path=Imagen}" />
                         <Grid Margin="0,0,0,15">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -172,11 +171,11 @@
                                     Margin="0,0,5,0">
                                 <StackPanel>
                                     <RadioButton x:Name="HeroeRadioButton"
-                                                 IsChecked="{Binding Source={StaticResource nuevoSuperheroe}, Path=Heroe}"
+                                                 IsChecked="{Binding Path=Heroe}"
                                                  Content="Héroe"
                                                  GroupName="Tipo" />
                                     <RadioButton x:Name="VillanoRadioButton"
-                                                 IsChecked="{Binding Source={StaticResource nuevoSuperheroe}, Path=Villano}"
+                                                 IsChecked="{Binding Path=Villano}"
                                                  Content="Villano"
                                                  GroupName="Tipo" />
                                 </StackPanel>
@@ -186,8 +185,10 @@
                                     Margin="5,0,0,0">
                                 <StackPanel>
                                     <CheckBox x:Name="VengadoresCheckBox"
+                                              IsChecked="{Binding Path=Vengador}"
                                               Content="Vengadores" />
                                     <CheckBox x:Name="XmenCheckBox"
+                                              IsChecked="{Binding Path=Xmen}"
                                               Content="X-men" />
                                 </StackPanel>
                             </Border>

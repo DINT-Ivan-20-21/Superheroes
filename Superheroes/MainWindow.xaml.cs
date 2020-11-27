@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -51,16 +48,12 @@ namespace Superheroes
         {
             MessageBox.Show("Superhéroe insertado con exito", "Superhéroes", MessageBoxButton.OK, MessageBoxImage.Information);
             superheroes.Add(Resources["nuevoSuperheroe"] as Superheroe);
+            Resources.Remove("nuevoSuperheroe");
+            Resources.Add("nuevoSuperheroe", new Superheroe());
             ActualizaContador();
-            Limpiar();
         }
 
         private void LimpiarButton_Click(object sender, RoutedEventArgs e)
-        {
-            Limpiar();
-        }
-
-        private void Limpiar()
         {
             NombreTextBox.Text = "";
             ImagenTextBox.Text = "";
